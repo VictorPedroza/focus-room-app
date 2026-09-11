@@ -19,7 +19,7 @@ const STATUS_MAP = {
 
 export const Sidebar = () => {
     return (
-        <aside className="flex h-full w-80 flex-col space-y-6 border-l border-slate-800 bg-slate-950 p-4 text-slate-100">
+        <aside className="flex h-full flex-col space-y-6 border-l border-slate-800 bg-slate-950 p-4 text-slate-100">
             {/* Cabeçalho do Grupo */}
             <div className="flex items-center justify-between border-b border-slate-800/80 pb-4">
                 <h2 className="text-lg font-semibold tracking-tight">Seu Grupo</h2>

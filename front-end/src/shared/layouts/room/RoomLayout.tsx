@@ -3,13 +3,15 @@ import { Sidebar, Header } from "../../components";
 
 export const RoomLayout = () => {
     return (
-        <div className="min-h-screen w-full flex flex-col items-center bg-slate-950">
+        <div className="flex min-h-screen w-full flex-col bg-slate-950">
             <Header />
-            <div className="flex w-full max-w-7xl flex-1 justify-between gap-6">
-                <main className="flex-1">
+
+            <div className="mx-auto flex w-full flex-1 gap-6">
+                <main className="min-w-0 min-h-0 flex-1">
                     <Outlet />
                 </main>
-                <aside className="w-20 shrink-0">
+
+                <aside className="hidden min-h-0 shrink-0 lg:block">
                     <Sidebar />
                 </aside>
             </div>
