@@ -1,6 +1,16 @@
-import { HomePage } from "../pages";
-import type { Route } from "../types";
+import { Room } from "../components/room/Room";
+import { MainLayout } from "../layouts/main/MainLayout";
+import type { Layout } from "../types";
 
-export const routes: Route[] = [
-    { path: "", component: HomePage },
-]
+export const routes: Layout[] = [
+  {
+    path: "",
+    component: MainLayout,
+    children: [
+      {
+        path: "",
+        component: Room,
+      },
+    ],
+  },
+];
