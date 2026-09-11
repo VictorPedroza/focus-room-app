@@ -17,7 +17,7 @@ export const Room = () => {
     };
 
     return (
-        <div className="mt-14 max-w-sm rounded-2xl border border-slate-700/30 bg-slate-900/50 p-6 w-95 h-87.5">
+        <div className="mt-14 max-w-sm rounded-2xl border border-slate-700/30 bg-slate-900/50 p-6 w-95 h-auto">
             <div className="flex items-center justify-between rounded-lg border border-slate-800/30 bg-slate-900 p-1">
                 <button
                     className={getButtonStyles("create")}
@@ -33,7 +33,7 @@ export const Room = () => {
                     Entrar
                 </button>
             </div>
-            <div className="mt-6">
+            <div className="mt-4">
                 {roomType === "create" && <CreateRoom />}
                 {roomType === "entry" && <EntryRoom />}
             </div>
