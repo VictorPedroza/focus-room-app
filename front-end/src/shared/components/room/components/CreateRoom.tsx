@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import { Button } from "../common/Button"
-import { Input } from "../common/Input"
+import { Input } from "../../common/input/Input";
+import { Button } from "../../common/button/Button";
 
 const DURATION_OPTS = [
     { label: '25 min', value: 25, desc: 'Pomodoro clássico' },

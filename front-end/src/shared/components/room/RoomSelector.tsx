@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { CreateRoom } from "./CreateRoom";
-import { EntryRoom } from "./EntryRoom";
+import { CreateRoom, EntryRoom } from "./components";
 
 type RoomType = "create" | "entry";
 
-export const Room = () => {
+export const RoomSelector = () => {
     const [roomType, setRoomType] = useState<RoomType>("create");
 
     const getButtonStyles = (type: RoomType) => {

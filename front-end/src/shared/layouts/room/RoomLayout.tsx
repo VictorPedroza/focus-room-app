@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "../../components/layouts/header/Header";
-import { Sidebar } from "../../components/layouts/sidebar/Sidebar";
+import { Sidebar, Header } from "../../components";
 
 export const RoomLayout = () => {
     return (

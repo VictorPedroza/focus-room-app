@@ -1,8 +1,7 @@
-import { Room } from "../components/room/Room";
-import { MainLayout } from "../layouts/main/MainLayout";
-import { RoomLayout } from "../layouts/room/RoomLayout";
-import { HomePage } from "../pages";
-import type { Layout } from "../types";
+import type { Layout } from "../../shared/constants";
+import { MainLayout, RoomLayout } from "../../shared/layouts";
+import { RoomSelector } from "../../shared/components";
+import { HomePage } from "../../pages";
 
 export const routes: Layout[] = [
   {
@@ -11,7 +10,7 @@ export const routes: Layout[] = [
     children: [
       {
         path: "",
-        component: Room,
+        component: RoomSelector,
       },
     ],
   },

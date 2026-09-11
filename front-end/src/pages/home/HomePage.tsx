@@ -1,9 +1,9 @@
 import { useEffect } from "react"
-import { socket } from "../../services/socket/socket";
+import { socket } from "../../shared/lib";
 
 export const HomePage = () => {
     useEffect(() => {
-        socket.emit("join_room", { roomId: "1234" });
+        socket.emit("join_room");
     }, []); 
 
     return(

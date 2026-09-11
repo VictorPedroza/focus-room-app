@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
-import { Button } from "../common/Button"
-import { Input } from "../common/Input"
+import { Input } from "../../common/input/Input";
+import { Button } from "../../common/button/Button";
 
 export const EntryRoom = () => {
     const navigate = useNavigate();
