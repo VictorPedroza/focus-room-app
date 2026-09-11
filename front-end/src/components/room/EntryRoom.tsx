@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom"
 import { Button } from "../common/Button"
 import { Input } from "../common/Input"
 
 export const EntryRoom = () => {
+    const navigate = useNavigate();
+
     return (
         <div>
             <Input label="Nome:" placeholder="Digite seu Nome" />
@@ -9,6 +12,7 @@ export const EntryRoom = () => {
             <p className="text-xs text-slate-600 text-center mt-1">Solicite o código para quem criou a sala</p>
             <Button
                 text="Entrar na sala →"
+                onClick={() => navigate("room")}
             />
         </div>
     )

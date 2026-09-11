@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { Button } from "../common/Button"
 import { Input } from "../common/Input"
 
@@ -8,6 +9,8 @@ const DURATION_OPTS = [
 ]
 
 export const CreateRoom = () => {
+    const navigate = useNavigate();
+
     return (
         <div>
             <Input label="Nome:" placeholder="Digite seu Nome" />
@@ -24,6 +27,7 @@ export const CreateRoom = () => {
             </div>
             <Button
                 text="Criar sala →"
+                onClick={() => navigate("room")}
             />
         </div>
     )
