@@ -6,7 +6,7 @@ import type {
 } from "@/shared/constants";
 import { enviroment } from "@/core/env";
 
-const SOCKET_URL = enviroment.WebSocketUrl || "http://localhost:8000";
+const SOCKET_URL = enviroment.WebSocketUrl;
 
 export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
   SOCKET_URL,
