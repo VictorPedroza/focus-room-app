@@ -1,40 +1,36 @@
+import { Logo } from "@/shared/components";
+import { useRoom } from "@/core/contexts";
+import { useState } from "react";
+
 export const Header = () => {
+    const { room } = useRoom();
+
+    const user = room?.members.find((user) => user.id === localStorage.getItem("userId"));
+
+    const [copied, setCopied] = useState(false);
+
+    const handleCopyCode = async () => {
+        const code = `FRSM-${room?.id}`;
+
+        try {
+            await navigator.clipboard.writeText(code);
+            setCopied(true);
+
+            setTimeout(() => {
+                setCopied(false);
+            }, 2000);
+        } catch (error) {
+            console.error("Erro ao copiar código:", error);
+        }
+    };
+
+
     return (
         <header className="w-full border-b border-slate-800 bg-slate-950 px-4 py-3">
             <div className="mx-auto flex w-full items-center justify-between gap-4">
                 {/* Identidade da sala */}
                 <div className="flex min-w-0 items-center gap-3">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-blue-800">
-                        <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 18 18"
-                            fill="none"
-                            aria-hidden="true"
-                        >
-                            <circle
-                                cx="6"
-                                cy="9"
-                                r="3"
-                                fill="white"
-                                opacity="0.9"
-                            />
-                            <circle
-                                cx="12"
-                                cy="6"
-                                r="2.5"
-                                fill="white"
-                                opacity="0.65"
-                            />
-                            <circle
-                                cx="12"
-                                cy="12"
-                                r="2.5"
-                                fill="white"
-                                opacity="0.65"
-                            />
-                        </svg>
-                    </span>
+                    <Logo />
 
                     <div className="min-w-0">
                         <p className="text-xs font-medium text-slate-400">
@@ -42,7 +38,7 @@ export const Header = () => {
                         </p>
 
                         <h1 className="truncate text-base font-semibold text-slate-100">
-                            Room Title
+                            {room?.title}
                         </h1>
                     </div>
                 </div>
@@ -58,15 +54,22 @@ export const Header = () => {
                     </div>
 
                     {/* Código */}
-                    <div className="hidden rounded-md border border-slate-800 bg-slate-900 items-center justify-center px-3 py-1.5 sm:flex">
+                    {/* Código */}
+                    <button
+                        type="button"
+                        onClick={handleCopyCode}
+                        className="hidden rounded-md border border-slate-800 bg-slate-900 items-center justify-center px-3 py-1.5 sm:flex cursor-pointer hover:bg-slate-800 transition-colors"
+                        title={copied ? "Copiado!" : "Clique para copiar"}
+                    >
                         <span className="font-mono text-xs text-slate-400">
-                            FRSM-1324
+                            {copied ? "Copiado!" : `FRSM-${room?.id}`}
                         </span>
-                    </div>
+                    </button>
+
 
                     {/* Avatar / usuário */}
                     <div className="flex size-9 items-center justify-center rounded-full bg-slate-800 text-xs font-semibold text-slate-200">
-                        PE
+                        {user?.name.substring(0, 2).toUpperCase()}
                     </div>
                 </div>
             </div>
