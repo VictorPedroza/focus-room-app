@@ -1,13 +1,14 @@
-import { RoomContext } from "./RoomContext";
-import { socket } from "../../../shared/lib";
+import { useNavigate } from "react-router-dom";
 import {
     useCallback,
     useEffect,
     useState,
     type ReactNode,
 } from "react";
-import { useNavigate } from "react-router-dom";
-import type { RoomState } from "../../../shared/constants/room";
+import type { RoomState } from "@/shared/constants";
+import { connectSocket, socket } from "@/shared/lib";
+
+import { RoomContext } from "./RoomContext";
 
 interface RoomContextProviderProps {
     children: ReactNode;
@@ -42,73 +43,20 @@ export const RoomContextProvider = ({
     }, [navigate]);
 
     const getRoom = useCallback((id: string) => {
-        const requestRoom = () => {
-            socket.emit("get_room", {
-                id
-            });
-        };
-
-        if (socket.connected) {
-            requestRoom();
-            return;
-        }
-
-        socket.once("connect", requestRoom);
+        connectSocket(); 
+        socket.emit("get_room", { id });
     }, []);
 
-    const joinRoom = useCallback(
-        ({
-            id,
-            userName,
-        }: {
-            id: string;
-            userName: string;
-        }) => {
-            const join = () => {
-                socket.emit("join_room", {
-                    id,
-                    userName,
-                });
-            };
-            localStorage.setItem("roomId", id);
+    const joinRoom = useCallback(({ id, userName }: { id: string; userName: string }) => {
+        localStorage.setItem("roomId", id);
+        connectSocket();
+        socket.emit("join_room", { id, userName });
+    }, []);
 
-            if (socket.connected) {
-                join();
-                return;
-            }
-
-            socket.once("connect", join);
-        },
-        [],
-    );
-
-    const createRoom = useCallback(
-        ({
-            id,
-            title,
-            userName,
-        }: {
-            id: string;
-            title: string;
-            userName: string;
-        }) => {
-            const create = () => {
-                socket.emit("create_room", {
-                    id,
-                    title,
-                    userName,
-                });
-            };
-
-            if (socket.connected) {
-                create();
-                return;
-            }
-
-            socket.once("connect", create);
-        },
-        [],
-    );
+    const createRoom = useCallback(({ id, title, userName }: { id: string; title: string; userName: string }) => {
+        connectSocket();
+        socket.emit("create_room", { id, title, userName });
+    }, []);
 
     return (
         <RoomContext.Provider
