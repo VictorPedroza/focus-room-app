@@ -10,7 +10,9 @@ export function setupWebSocket(server: HttpServer) {
     },
   });
 
-  ws.on("connection", registerConnectionHandler);
+  ws.on("connection", (socket) => {
+    registerConnectionHandler(socket, ws);
+  });
 
   return ws;
 }
