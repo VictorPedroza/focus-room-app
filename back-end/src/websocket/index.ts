@@ -1,11 +1,13 @@
 import { Server as HttpServer } from "http";
 import { Server } from "socket.io";
+
 import { registerConnectionHandler } from "./handlers/connection.js";
+import { enviroment } from "../core/env/enviroment.js";
 
 export function setupWebSocket(server: HttpServer) {
   const ws = new Server(server, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: enviroment.FRONT_END_URL,
       methods: ["GET", "POST"],
     },
   });
