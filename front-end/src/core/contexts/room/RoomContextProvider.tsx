@@ -17,6 +17,7 @@ interface RoomContextProviderProps {
 export const RoomContextProvider = ({
     children,
 }: RoomContextProviderProps) => {
+    const isConnected = socket.connected;
     const [room, setRoom] = useState<RoomState>();
     const navigate = useNavigate();
 
@@ -62,6 +63,7 @@ export const RoomContextProvider = ({
         <RoomContext.Provider
             value={{
                 room,
+                isConnected,
                 getRoom,
                 joinRoom,
                 createRoom,

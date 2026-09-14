@@ -3,7 +3,7 @@ import { useRoom } from "@/core/contexts";
 import { useState } from "react";
 
 export const Header = () => {
-    const { room } = useRoom();
+    const { room, isConnected } = useRoom();
 
     const user = room?.members.find((user) => user.id === localStorage.getItem("userId"));
 
@@ -46,10 +46,10 @@ export const Header = () => {
                 {/* Informações da sessão */}
                 <div className="flex shrink-0 items-center gap-3">
                     {/* Status */}
-                    <div className="flex items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/10 px-3 py-1.5">
-                        <span className="size-2 animate-pulse rounded-full bg-emerald-400" />
-                        <span className="text-xs font-medium text-emerald-400">
-                            Ao Vivo
+                    <div className={`flex items-center gap-2 rounded-full border ${isConnected ? "border-emerald-500/20 bg-emerald-500/10" : "border-red-500/20 bg-red-500/10"} px-3 py-1.5`}>
+                        <span className={`size-2 animate-pulse rounded-full ${isConnected ? "bg-emerald-400" : "bg-red-400"}`} />
+                        <span className={`text-xs font-medium ${isConnected ? "text-emerald-400" : "text-red-500"}`}>
+                            {isConnected ? "Ao Vivo" : "Não Conectado"}
                         </span>
                     </div>
 

@@ -16,6 +16,7 @@ interface RoomContextProps {
     getRoom(id: string): void;
 
     room: RoomState | undefined;
+    isConnected: boolean;
 }
 
 export const RoomContext = createContext<RoomContextProps | undefined>(undefined);
