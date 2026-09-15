@@ -82,7 +82,6 @@ export class RoomHandler {
 
   private handleRoomResult(result: RoomResult, code?: string) {
     if (result.success) {
-      console.log("Teste", result);
       if (code) {
         this.emitRoomUpdate(code, result.room);
       } else {
