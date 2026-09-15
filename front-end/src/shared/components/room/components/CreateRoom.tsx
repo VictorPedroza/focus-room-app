@@ -1,9 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import { useRoom } from "@/core/contexts";
+import { useRoom } from "@room/contexts";
 import { Button, Input } from "@/shared/components"
-
+import { useNavigate } from "react-router-dom";
 
 const DURATION_OPTS = [
     { label: "25 min", value: 25, desc: "Pomodoro clássico" },
@@ -12,27 +11,39 @@ const DURATION_OPTS = [
 ];
 
 export const CreateRoom = () => {
-    const [title, setTitle] = useState("");
-    const [userName, setUserName] = useState("");
-    const [duration, setDuration] = useState(25);
-
-    const { createRoom } = useRoom();
+    const { room, createRoom } = useRoom();
     const navigate = useNavigate();
 
+    const [title, setTitle] = useState("");
+    const [username, setUsername] = useState("");
+    const [duration, setDuration] = useState(25);
+
+    useEffect(() => {
+        if (room) {
+            navigate(`/room/${room.code}`);
+        }
+    }, [room, navigate]);
+
     const handleCreateRoom = () => {
-        if (!title.trim() || !userName.trim()) {
+        if (!title.trim() || !username.trim()) {
             return;
+        }
+
+        const member = {
+            id: crypto.randomUUID(),
+            username
         }
 
         const code = Math.floor(1000 + Math.random() * 9000).toString();
 
         createRoom({
-            id: code,
+            code: code,
             title: title,
-            userName: userName,
+            member: {
+                id: member.id,
+                username: member.username
+            },
         });
-
-        navigate(`/room/${code}`);
     };
 
     return (
@@ -40,8 +51,8 @@ export const CreateRoom = () => {
             <Input
                 label="Nome:"
                 placeholder="Digite seu Nome"
-                value={userName}
-                onChange={(e) => setUserName(e.target.value)}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
             />
 
             <Input
