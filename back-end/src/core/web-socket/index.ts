@@ -1,10 +1,10 @@
 import { Server as HttpServer } from "http";
 import { Server } from "socket.io";
 
-import { registerConnectionHandler } from "./handlers/connection.js";
-import { environment } from "../core/env/enviroment.js";
+import { environment } from "@/core/env";
+import { registerRoomHandler } from "@/modules/room";
 
-export function setupWebSocket(server: HttpServer) {
+const setupWebSocket = (server: HttpServer) => {
   const ws = new Server(server, {
     cors: {
       origin: environment.FRONT_END_URL,
@@ -13,8 +13,9 @@ export function setupWebSocket(server: HttpServer) {
   });
 
   ws.on("connection", (socket) => {
-    registerConnectionHandler(socket, ws);
+    registerRoomHandler(socket, ws);
   });
 
   return ws;
 }
+export default setupWebSocket;
