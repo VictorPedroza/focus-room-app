@@ -1,1 +1,1 @@
-export * from "./enviroment";
+export * from "./environment";
