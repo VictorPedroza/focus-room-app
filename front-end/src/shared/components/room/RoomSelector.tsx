@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import { CreateRoom, EntryRoom } from "./components";
 
-type RoomType = "create" | "entry";
+type formType = "create" | "entry";
 
 export const RoomSelector = () => {
-    const [roomType, setRoomType] = useState<RoomType>("create");
+    const { code } = useParams();
+    const [formType, setFormtype] = useState<formType>(code ? "entry" : "create");
 
-    const getButtonStyles = (type: RoomType) => {
-        const isActive = roomType === type;
+    const getButtonStyles = (type: formType) => {
+        const isActive = formType === type;
         const baseStyles = "w-full py-1.5 rounded transition-colors text-sm font-medium focus-visible:outline-2 focus-visible:outline-slate-400";
         const activeStyles = "bg-slate-800 border border-slate-700/30 text-slate-100 font-semibold shadow-sm";
         const inactiveStyles = "text-slate-400 hover:text-slate-200";
@@ -20,21 +22,21 @@ export const RoomSelector = () => {
             <div className="flex items-center justify-between rounded-lg border border-slate-800/30 bg-slate-900 p-1">
                 <button
                     className={getButtonStyles("create")}
-                    onClick={() => setRoomType("create")}
+                    onClick={() => setFormtype("create")}
                 >
                     Criar Sala
                 </button>
 
                 <button
                     className={getButtonStyles("entry")}
-                    onClick={() => setRoomType("entry")}
+                    onClick={() => setFormtype("entry")}
                 >
                     Entrar
                 </button>
             </div>
             <div className="mt-4">
-                {roomType === "create" && <CreateRoom />}
-                {roomType === "entry" && <EntryRoom />}
+                {formType === "create" && <CreateRoom />}
+                {formType === "entry" && <EntryRoom />}
             </div>
         </div>
     );
