@@ -1,8 +1,11 @@
-import { AppRoutes } from "./core/routes";
+import { AppRoutes } from "@/core/routes";
+import { MainContext } from "@/core/context";
 
 function App() {
   return (
-    <AppRoutes />
+    <MainContext>
+      <AppRoutes />
+    </MainContext>
   );
 }
 
