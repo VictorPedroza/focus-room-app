@@ -1,36 +1,13 @@
-import { io, Socket } from "socket.io-client";
+import { io, type Socket } from "socket.io-client";
 
-import type {
-  ClientToServerEvents,
-  ServerToClientEvents,
-} from "@/shared/constants";
-import { enviroment } from "@/core/env";
+import { environment } from "@/core/env";
+import type { ClientToServer, ServerToClient } from "@room/types";
 
-const SOCKET_URL = enviroment.WebSocketUrl;
+const SOCKET_URL = environment.WebSocketUrl;
 
-export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
+export const socket: Socket<ServerToClient, ClientToServer> = io(
   SOCKET_URL,
   {
-    autoConnect: false,
+    autoConnect: true,
   },
 );
-
-export function connectSocket() {
-  if(socket.connected) return;
-
-  let userId = localStorage.getItem("userId");
-
-  if(!userId) {
-    userId = crypto.randomUUID();
-    localStorage.setItem("userId", userId);
-  }
-
-  socket.auth = { userId }
-  socket.connect();
-}
-
-export function disconnectSocket() {
-  if (socket.connected) {
-    socket.disconnect();
-  }
-}
