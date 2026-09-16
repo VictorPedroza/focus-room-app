@@ -1,20 +1,20 @@
+import { useRoom } from "@room/contexts";
 import { Logo } from "@/shared/components";
-import { useRoom } from "@/core/contexts";
 import { useState } from "react";
 
 export const Header = () => {
-    const { room, isConnected } = useRoom();
+    const { room } = useRoom();
 
     const user = room?.members.find((user) => user.id === localStorage.getItem("userId"));
 
     const [copied, setCopied] = useState(false);
 
     const handleCopyCode = async () => {
-        const code = `FRSM-${room?.id}`;
-
         try {
-            await navigator.clipboard.writeText(code);
-            setCopied(true);
+            if (room) {
+                await navigator.clipboard.writeText(room.code);
+                setCopied(true);
+            }
 
             setTimeout(() => {
                 setCopied(false);
@@ -23,7 +23,6 @@ export const Header = () => {
             console.error("Erro ao copiar código:", error);
         }
     };
-
 
     return (
         <header className="w-full border-b border-slate-800 bg-slate-950 px-4 py-3">
@@ -45,15 +44,6 @@ export const Header = () => {
 
                 {/* Informações da sessão */}
                 <div className="flex shrink-0 items-center gap-3">
-                    {/* Status */}
-                    <div className={`flex items-center gap-2 rounded-full border ${isConnected ? "border-emerald-500/20 bg-emerald-500/10" : "border-red-500/20 bg-red-500/10"} px-3 py-1.5`}>
-                        <span className={`size-2 animate-pulse rounded-full ${isConnected ? "bg-emerald-400" : "bg-red-400"}`} />
-                        <span className={`text-xs font-medium ${isConnected ? "text-emerald-400" : "text-red-500"}`}>
-                            {isConnected ? "Ao Vivo" : "Não Conectado"}
-                        </span>
-                    </div>
-
-                    {/* Código */}
                     {/* Código */}
                     <button
                         type="button"
@@ -62,14 +52,14 @@ export const Header = () => {
                         title={copied ? "Copiado!" : "Clique para copiar"}
                     >
                         <span className="font-mono text-xs text-slate-400">
-                            {copied ? "Copiado!" : `FRSM-${room?.id}`}
+                            {copied ? "Copiado!" : `FRSM-${room?.code}`}
                         </span>
                     </button>
 
 
                     {/* Avatar / usuário */}
                     <div className="flex size-9 items-center justify-center rounded-full bg-slate-800 text-xs font-semibold text-slate-200">
-                        {user?.name.substring(0, 2).toUpperCase()}
+                        {user?.username.substring(0, 1).toUpperCase()}
                     </div>
                 </div>
             </div>
