@@ -1,19 +1,7 @@
-import { Outlet, useParams } from "react-router-dom";
-import { useEffect } from "react";
-
-import { useRoom } from "@/core/contexts";
+import { Outlet } from "react-router-dom";
 import { Header, Sidebar } from "@/shared/components";
 
 export const RoomLayout = () => {
-    const { code } = useParams();
-    const { getRoom } = useRoom();
-
-    useEffect(() => {
-        if (code) {
-            getRoom(code);
-        }
-    }, [code, getRoom]);
-
     return (
         <div className="flex min-h-screen w-full flex-col bg-slate-950">
             <Header />
