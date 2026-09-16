@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react"
 import { RoomContext } from "./RoomContext"
-import type { CreateRoomProps, JoinRoomProps, Room, RoomError } from "../types/room.types";
+import type { CreateRoomProps, JoinRoomProps, Room, RoomError, UpdateMemberStatusProps } from "../types/room.types";
 import { socket } from "@/shared/lib";
 import { useNavigate } from "react-router-dom";
 
@@ -68,8 +68,12 @@ export const RoomContextProvider = ({ children }: { children: ReactNode }) => {
         socket.emit("join_room", data);
     }, []);
 
+    const updateMemberStatus = useCallback((data: UpdateMemberStatusProps) => {
+        socket.emit("update_member_status", data);
+    }, [])
+
     return (
-        <RoomContext.Provider value={{ room, createRoom, joinRoom }} >
+        <RoomContext.Provider value={{ room, createRoom, joinRoom, updateMemberStatus }} >
             {children}
         </RoomContext.Provider>
     )

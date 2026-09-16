@@ -1,11 +1,17 @@
 import { createContext, useContext } from "react";
 
-import type { CreateRoomProps, JoinRoomProps, Room } from "../types/room.types";
+import type  {
+  Room,
+  CreateRoomProps,
+  JoinRoomProps,
+  UpdateMemberStatusProps,
+} from "../types/room.types";
 
 interface RoomContext {
-    room: Room | undefined;
-    createRoom: (data: CreateRoomProps) => void;
-    joinRoom: (data: JoinRoomProps) => void;
+  room: Room | undefined;
+  createRoom: (data: CreateRoomProps) => void;
+  joinRoom: (data: JoinRoomProps) => void;
+  updateMemberStatus: (data: UpdateMemberStatusProps) => void;
 }
 
 export const RoomContext = createContext<RoomContext | undefined>(undefined);
