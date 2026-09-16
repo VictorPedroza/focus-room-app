@@ -10,12 +10,14 @@ export const Sidebar = () => {
 
     const statusStyle: Record<MemberStatus, string> = {
         online: "bg-green-500/50 border-green-400/60 text-green-400",
-        focused: "bg-yellow-500/50 border-yellow-400/60 text-yellow-400"
+        focused: "bg-yellow-500/50 border-yellow-400/60 text-yellow-400",
+        paused: "bg-gray-500/50 border-gray-400/60 text-gray-400",
     };
 
     const statusMap: Record<MemberStatus, string> = {
         online: "Em Foco",
-        focused: "Foco Parado"
+        focused: "Foco Parado",
+        paused: "Em Pausa",
     };
 
     const inviteUrl = `${window.location.origin}/convite/${room?.code}`; 
