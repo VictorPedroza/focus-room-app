@@ -13,6 +13,10 @@ export const routes: Layout[] = [
         path: "",
         component: RoomSelector,
       },
+      {
+        path: "convite/:code",
+        component: RoomSelector,
+      },
     ],
   },
   {
