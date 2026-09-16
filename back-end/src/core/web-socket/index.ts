@@ -5,6 +5,7 @@ import { environment } from "@/core/env";
 import { registerRoomHandler } from "@/modules/room";
 
 const setupWebSocket = (server: HttpServer) => {
+  console.log("client: ", environment.FRONT_END_URL)
   const ws = new Server(server, {
     cors: {
       origin: environment.FRONT_END_URL,
