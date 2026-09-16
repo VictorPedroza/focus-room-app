@@ -8,12 +8,12 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     react(),
-    tailwindcss()    
+    tailwindcss(),
   ],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@room': path.resolve(__dirname, './src/modules/room'),
+      '@': path.resolve(import.meta.dirname, './src'),
+      '@room': path.resolve(import.meta.dirname, './src/modules/room'),
     },
   },
 })
