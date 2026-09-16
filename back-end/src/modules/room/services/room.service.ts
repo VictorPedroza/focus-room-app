@@ -5,7 +5,7 @@ import type {
   LeaveRoomProps,
   Room,
   RoomResult,
-  UpdateStatusProps,
+  UpdateMemberStatusProps,
 } from "../types/room.types.js";
 
 /**
@@ -134,7 +134,7 @@ export class RoomService {
     };
   }
 
-  updateStatus({ code, member }: UpdateStatusProps): RoomResult {
+  updateStatus({ code, member }: UpdateMemberStatusProps): RoomResult {
     const room = this.rooms.get(code);
 
     if (!room) {

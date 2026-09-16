@@ -1,4 +1,4 @@
-type MemberStatus = "online" | "focused";
+type MemberStatus = "online" | "focused" | "paused";
 
 interface Member {
   id: string;
@@ -49,7 +49,7 @@ export interface LeaveRoomProps {
   };
 }
 
-export interface UpdateStatusProps {
+export interface UpdateMemberStatusProps {
   code: string;
   member: {
     id: string;
@@ -81,7 +81,7 @@ export interface ClientToServer {
   create_room: (data: CreateRoomProps) => void;
   join_room: (data: JoinRoomProps) => void;
   leave_room: (data: LeaveRoomProps) => void;
-  update_member_status: (data: UpdateStatusProps) => void;
+  update_member_status: (data: UpdateMemberStatusProps) => void;
   get_room: (data: GetRoomProps) => void;
 }
 
