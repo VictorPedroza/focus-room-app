@@ -18,7 +18,7 @@ export const RoomSelector = () => {
     };
 
     return (
-        <div className="mt-14 max-w-sm rounded-2xl border border-slate-700/30 bg-slate-900/50 p-6 w-95 h-auto">
+        <div className="mt-14 max-w-sm rounded-2xl sm:border border-slate-700/30 sm:bg-slate-900/50 p-6 w-95 h-auto">
             <div className="flex items-center justify-between rounded-lg border border-slate-800/30 bg-slate-900 p-1">
                 <button
                     className={getButtonStyles("create")}
