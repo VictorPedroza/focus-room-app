@@ -38,6 +38,7 @@ export const CreateRoom = () => {
 
         createRoom({
             code: code,
+            duration: duration,
             title: title,
             member: {
                 id: member.id,
