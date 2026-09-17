@@ -55,7 +55,7 @@ export const Input = ({
                         bg-transparent
                         px-3
                         text-sm
-                        text-slate-100
+                        text-slate-600
                         outline-none
                         placeholder:text-slate-600
                         disabled:cursor-not-allowed
