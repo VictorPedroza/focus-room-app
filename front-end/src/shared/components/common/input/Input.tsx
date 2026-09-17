@@ -55,9 +55,9 @@ export const Input = ({
                         bg-transparent
                         px-3
                         text-sm
-                        text-slate-600
+                        text-slate-400
                         outline-none
-                        placeholder:text-slate-600
+                        placeholder:text-slate-400
                         disabled:cursor-not-allowed
                         ${icon ? "pl-2" : ""}
                         ${className}

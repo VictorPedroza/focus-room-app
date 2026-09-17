@@ -41,7 +41,7 @@ export const EntryRoom = () => {
             />
             <div className="mt-3 w-full flex flex-col">
                 <label htmlFor="code" className="pl-2 text-xs text-slate-600">Codigo:</label>
-                <div className="flex w-full px-3 items-center border border-gray-800 bg-slate-900 rounded-lg text-slate-600">
+                <div className="flex w-full px-3 items-center border border-gray-800 bg-slate-900 rounded-lg text-slate-400">
                     <p>FRSM-</p>
                     <input
                         type="number"
@@ -50,9 +50,9 @@ export const EntryRoom = () => {
                         onChange={(e) => setCode(e.target.value)}
                         className="h-10 bg-transparent
                         text-sm
-                        text-slate-600
+                        text-slate-400
                         outline-none
-                        placeholder:text-slate-600
+                        placeholder:text-slate-400
                         disabled:cursor-not-allowedx
                         [appearance:textfield]
                         [&::-webkit-inner-spin-button]:appearance-none
