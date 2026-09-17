@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react"
 import { RoomContext } from "./RoomContext"
-import type { CreateRoomProps, JoinRoomProps, Room, RoomError, UpdateMemberStatusProps } from "../types/room.types";
+import type { CreateRoomProps, JoinRoomProps, LeaveRoomProps, Room, RoomError, UpdateMemberStatusProps } from "../types/room.types";
 import { socket } from "@/shared/lib";
 import { useNavigate } from "react-router-dom";
 
@@ -22,12 +22,6 @@ export const RoomContextProvider = ({ children }: { children: ReactNode }) => {
         const getRoom = () => {
             const roomCode = localStorage.getItem("roomCode");
             const userId = localStorage.getItem("userId");
-
-            console.log("GET ROOM", {
-                roomCode,
-                userId,
-                connected: socket.connected,
-            });
 
             if (!roomCode || !userId) {
                 navigate("/");
@@ -72,8 +66,17 @@ export const RoomContextProvider = ({ children }: { children: ReactNode }) => {
         socket.emit("update_member_status", data);
     }, [])
 
+    const leaveRoom = useCallback((data: LeaveRoomProps) => {
+        localStorage.removeItem("userId");
+        localStorage.removeItem("roomCode");
+
+        socket.emit("leave_room", data);
+
+        setRoom(undefined);
+        navigate("/");
+    }, [navigate]);
     return (
-        <RoomContext.Provider value={{ room, createRoom, joinRoom, updateMemberStatus }} >
+        <RoomContext.Provider value={{ room, createRoom, joinRoom, updateMemberStatus, leaveRoom }} >
             {children}
         </RoomContext.Provider>
     )

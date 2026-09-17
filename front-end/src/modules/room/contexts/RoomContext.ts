@@ -5,6 +5,7 @@ import type  {
   CreateRoomProps,
   JoinRoomProps,
   UpdateMemberStatusProps,
+  LeaveRoomProps,
 } from "../types/room.types";
 
 interface RoomContext {
@@ -12,6 +13,7 @@ interface RoomContext {
   createRoom: (data: CreateRoomProps) => void;
   joinRoom: (data: JoinRoomProps) => void;
   updateMemberStatus: (data: UpdateMemberStatusProps) => void;
+  leaveRoom: (data: LeaveRoomProps) => void;
 }
 
 export const RoomContext = createContext<RoomContext | undefined>(undefined);

@@ -7,8 +7,11 @@ interface HeaderProps {
 }
 
 export const Header = ({ onToggleSidebar }: HeaderProps) => {
-    const { room } = useRoom();
-    const user = room?.members.find((user) => user.id === localStorage.getItem("userId"));
+    const { room, leaveRoom } = useRoom(); 
+    
+    const userId = localStorage.getItem("userId");
+    const user = room?.members.find((member) => member.id === userId);
+    
     const [copied, setCopied] = useState(false);
 
     const handleCopyCode = async () => {
@@ -21,6 +24,17 @@ export const Header = ({ onToggleSidebar }: HeaderProps) => {
         } catch (error) {
             console.error("Erro ao copiar código:", error);
         }
+    };
+
+    const handleLeaveRoom = () => {
+        if (!room || !userId) return;
+
+        leaveRoom({
+            code: room.code,
+            member: {
+                id: userId
+            }
+        });
     };
 
     return (
@@ -55,6 +69,21 @@ export const Header = ({ onToggleSidebar }: HeaderProps) => {
                     <div className="flex size-9 items-center justify-center rounded-full border border-slate-700/50 bg-slate-800 text-xs font-semibold text-slate-200">
                         {user?.username.substring(0, 1).toUpperCase()}
                     </div>
+
+                    {/* Botão de Sair da Sala */}
+                    <button
+                        type="button"
+                        onClick={handleLeaveRoom}
+                        className="flex items-center justify-center rounded-md p-2 text-slate-400 transition-colors hover:bg-red-500/10 hover:text-red-500"
+                        aria-label="Sair da sala"
+                        title="Sair da sala"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />
+                            <polyline points="16 17 21 12 16 7" />
+                            <line x1="21" y1="12" x2="9" y2="12" />
+                        </svg>
+                    </button>
 
                     {/* Botão Menu Mobile */}
                     {onToggleSidebar && (
