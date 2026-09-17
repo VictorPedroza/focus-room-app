@@ -1,8 +1,8 @@
 import type { Layout } from "@/shared/constants";
 
-import { HomePage } from "@/pages";
 import { RoomSelector } from "@/shared/components";
 import { MainLayout, RoomLayout } from "@/shared/layouts";
+import { PomodoroTimer } from "@/modules/pomodoro";
 
 export const routes: Layout[] = [
   {
@@ -25,7 +25,7 @@ export const routes: Layout[] = [
     children: [
       {
         path: ":code",
-        component: HomePage,
+        component: PomodoroTimer,
         isProtected: true
       },
     ],
